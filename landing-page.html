@@ -380,9 +380,8 @@
     </div>
 
     <script>
-        // Configuration Telegram Bot
-        const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN'; // À remplacer
-        const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID'; // À remplacer
+        // Configuration - Webhook Railway
+        const WEBHOOK_URL = 'https://landing-bot-client-france-production.up.railway.app/webhook/lead';
 
         // Form Submission
         document.getElementById('leadForm').addEventListener('submit', async function(e) {
@@ -398,9 +397,7 @@
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value || 'Non renseigné',
                 company: document.getElementById('company').value || 'Non renseigné',
-                message: document.getElementById('message').value || 'Aucun message',
-                timestamp: new Date().toLocaleString('fr-FR'),
-                source: window.location.href
+                message: document.getElementById('message').value || 'Aucun message'
             };
 
             // Track conversion sur Snapchat
@@ -410,41 +407,28 @@
                 });
             }
 
-            // Envoyer au Telegram Bot
-            const telegramMessage = `
-🎯 NOUVEAU LEAD !
-
-👤 Nom: ${formData.name}
-📧 Email: ${formData.email}
-📱 Téléphone: ${formData.phone}
-🏢 Entreprise: ${formData.company}
-💬 Message: ${formData.message}
-
-🕐 Date: ${formData.timestamp}
-🔗 Source: ${formData.source}
-            `;
-
             try {
-                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                // Envoyer au webhook Railway
+                const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        chat_id: TELEGRAM_CHAT_ID,
-                        text: telegramMessage,
-                        parse_mode: 'HTML'
-                    })
+                    body: JSON.stringify(formData)
                 });
 
-                // Afficher le message de succès
-                document.getElementById('successMessage').classList.add('show');
-                this.reset();
+                if (response.ok) {
+                    // Afficher le message de succès
+                    document.getElementById('successMessage').classList.add('show');
+                    this.reset();
 
-                // Cacher le message après 5 secondes
-                setTimeout(() => {
-                    document.getElementById('successMessage').classList.remove('show');
-                }, 5000);
+                    // Cacher le message après 5 secondes
+                    setTimeout(() => {
+                        document.getElementById('successMessage').classList.remove('show');
+                    }, 5000);
+                } else {
+                    throw new Error('Erreur serveur');
+                }
 
             } catch (error) {
                 console.error('Erreur:', error);
