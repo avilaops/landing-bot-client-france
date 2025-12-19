@@ -1,112 +1,97 @@
-# 🚀 Landing Page + Bot Telegram - Cliente Francês
+# 🚀 LeadCapture — Landing Page + Telegram Bot
 
-Système complet de landing page avec tracking de conversions via Telegram Bot et Snapchat Pixel.
+Landing page moderna com design Apple-style + Bot Telegram para captura de leads.
 
-## 🌐 Demo Live
+## ✨ Stack Tecnológico
 
-**Landing Page:** https://avilaops.github.io/landing-bot-client-france/
+- **TypeScript** - Type safety e desenvolvimento moderno
+- **Vite** - Build ultra-rápido e HMR
+- **Iconoir** - Ícones SVG open-source premium
+- **FastAPI** - Backend Python para webhooks
+- **MongoDB Atlas** - Database cloud
+- **Railway** - Deploy backend
+- **GitHub Pages** - Deploy frontend
 
-**Test Suite:** https://avilaops.github.io/landing-bot-client-france/test.html
+## 🎨 Features
 
-## 📦 Fonctionnalités
+- ✅ Design Apple-inspired com glassmorphism
+- ✅ Animações suaves e scroll effects
+- ✅ Dark mode automático
+- ✅ TypeScript com strict mode
+- ✅ Iconoir icons integrados
+- ✅ Formulário com validação
+- ✅ Snapchat Pixel tracking
+- ✅ Responsivo mobile-first
+- ✅ Performance otimizada
 
-### Landing Page
-- ✅ Design responsif moderne
-- ✅ Formulaire de capture de leads
-- ✅ Animations fluides
-- ✅ Optimisée pour la conversion
-- ✅ SEO friendly
+## 🛠️ Desenvolvimento
 
-### Bot Telegram
-- ✅ Notifications instantanées des nouveaux leads
-- ✅ Commandes de gestion (/stats, /leads, /today)
-- ✅ Dashboard de métriques
-- ✅ Stockage des données
+```bash
+# Instalar dependências
+npm install
 
-### Intégrations
-- ✅ Snapchat Pixel pour tracking
-- ✅ Webhook server (FastAPI)
-- ✅ MongoDB pour persistance
-- ✅ Analytics en temps réel
+# Servidor de desenvolvimento (localhost:3000)
+npm run dev
 
-## 🛠️ Stack Technique
+# Build para produção
+npm run build
 
-**Frontend:**
-- HTML5, CSS3, JavaScript
-- GitHub Pages (hosting)
+# Preview do build
+npm run preview
 
-**Backend:**
-- Python 3.11+
-- FastAPI (webhook server)
-- python-telegram-bot
-- MongoDB Atlas
-- Railway (hosting)
-
-## 📋 Structure du Projet
-
-```
-├── landing-page.html          # Page principale
-├── index.html                 # Redirection
-├── test.html                  # Suite de tests
-├── webhook_server.py          # Serveur webhook FastAPI
-├── telegram_bot.py            # Bot Telegram
-├── requirements.txt           # Dépendances Python
-├── railway.toml               # Config Railway
-└── .github/workflows/         # CI/CD GitHub Actions
+# Type checking
+npm run type-check
 ```
 
-## 🚀 Déploiement
+## 📦 Estrutura do Projeto
 
-### Frontend (GitHub Pages)
-Déployé automatiquement via GitHub Actions à chaque push sur `main`.
+```
+landing-bot-client-france/
+├── src/
+│   ├── main.ts          # Aplicação principal TypeScript
+│   ├── style.css        # Estilos globais
+│   └── vite-env.d.ts    # Types do Vite
+├── index.html           # Entry point
+├── package.json         # Dependências e scripts
+├── tsconfig.json        # Config TypeScript
+├── vite.config.ts       # Config Vite
+├── webhook_server.py    # Backend FastAPI
+└── telegram_bot.py      # Bot Telegram
+```
+
+## 🌐 URLs
+
+- **Frontend (GitHub Pages)**: https://avilaops.github.io/landing-bot-client-france/
+- **Backend (Railway)**: https://landing-bot-client-france-production.up.railway.app
+- **API Health**: https://landing-bot-client-france-production.up.railway.app/health
+
+## 🚀 Deploy
+
+### Frontend (Automático via GitHub Actions)
+Cada push para `main` dispara build e deploy no GitHub Pages.
 
 ### Backend (Railway)
-1. Connecter le repo sur Railway
-2. Configurer les variables d'environnement
-3. Deploy automatique
+Conectado ao GitHub, auto-deploy em cada push.
 
-## 📊 Configuration
+## 📝 Variáveis de Ambiente
 
-Variables d'environnement requises:
-```env
-TELEGRAM_BOT_TOKEN=your_token
-ADMIN_CHAT_ID=your_chat_id
-MONGODB_URL=your_mongodb_url
-DATABASE_NAME=landing_bot
-```
+Backend Railway precisa:
+- `TELEGRAM_BOT_TOKEN` - Token do BotFather
+- `ADMIN_CHAT_ID` - Chat ID do admin
+- `MONGODB_URL` - Connection string MongoDB Atlas
 
-## 📖 Documentation
+## 🎯 Próximos Passos
 
-- [SETUP.md](./SETUP.md) - Guide de configuration
-- [DEPLOY_RAILWAY_GITHUB.md](./DEPLOY_RAILWAY_GITHUB.md) - Guide de déploiement
-- [PLATAFORMAS.md](./PLATAFORMAS.md) - Options de plateformes
-- [INSTRUCOES_CLIENTE.md](./INSTRUCOES_CLIENTE.md) - Instructions client
+1. Instalar dependências: `npm install`
+2. Rodar dev server: `npm run dev`
+3. Obter token do bot do cliente
+4. Configurar variáveis no Railway
+5. Build e deploy: `npm run build`
 
-## 💰 Coûts
+## 📄 Licença
 
-- **GitHub Pages:** €0/mois (gratuit)
-- **Railway:** €5/mois
-- **MongoDB Atlas:** €0/mois (free tier 512MB)
-- **Total:** ~€5/mois
-
-## 🧪 Tests
-
-Accédez à la page de tests: https://avilaops.github.io/landing-bot-client-france/test.html
-
-Tests disponibles:
-1. Health check webhook server
-2. Connexion bot Telegram
-3. Soumission de lead de test
-4. Chargement Snapchat Pixel
-
-## 📞 Support
-
-Pour questions ou support technique, consultez la documentation ou créez une issue.
-
-## 📄 Licence
-
-© 2025 - Projet propriétaire du client
+MIT © Avila Development
 
 ---
 
-**Status:** ✅ Production Ready | 🚀 Live at https://avilaops.github.io/landing-bot-client-france/
+**Desenvolvido com ❤️ usando TypeScript + Vite + Iconoir**
