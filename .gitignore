@@ -9,3 +9,9 @@ __pycache__/
 .railway
 venv/
 env/
+dist/
+.turbo
+*.tsbuildinfo
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
