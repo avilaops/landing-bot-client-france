@@ -1,130 +1,112 @@
-# 🚀 Landing Page + Bot Telegram + Snapchat Integration
+# 🚀 Landing Page + Bot Telegram - Cliente Francês
 
-## 📋 Informações do Projeto
+Système complet de landing page avec tracking de conversions via Telegram Bot et Snapchat Pixel.
 
-**Cliente:** Cliente Francês
-**Valor Setup:** €1.900
-**Mensalidade:** €400/mês (meses 1-3), €300/mês (meses 4+)
-**Prazo:** 2-4 semanas
-**Data Início:** 19/12/2025
+## 🌐 Demo Live
 
-## 🎯 Escopo do Projeto
+**Landing Page:** https://avilaops.github.io/landing-bot-client-france/
 
-### 1. Landing Page Responsiva
-- Design moderno e profissional
-- Otimizada para conversão
-- Responsiva (mobile, tablet, desktop)
-- SEO otimizado
-- Performance otimizada (Core Web Vitals)
+**Test Suite:** https://avilaops.github.io/landing-bot-client-france/test.html
 
-### 2. Bot Telegram
-- Sistema de tracking de conversões
-- Integração com analytics
-- Notificações automáticas
-- Dashboard de métricas
-- Comandos personalizados
+## 📦 Fonctionnalités
 
-### 3. Integração Snapchat Pixel
-- Pixel configurado corretamente
-- Eventos de conversão
-- Tracking de leads
-- Analytics integrado
+### Landing Page
+- ✅ Design responsif moderne
+- ✅ Formulaire de capture de leads
+- ✅ Animations fluides
+- ✅ Optimisée pour la conversion
+- ✅ SEO friendly
 
-### 4. Deploy Completo
-- Domínio configurado
-- SSL/HTTPS
-- CDN (se necessário)
-- Backup automático
-- Monitoramento
+### Bot Telegram
+- ✅ Notifications instantanées des nouveaux leads
+- ✅ Commandes de gestion (/stats, /leads, /today)
+- ✅ Dashboard de métriques
+- ✅ Stockage des données
 
-## 📦 Entregáveis
+### Intégrations
+- ✅ Snapchat Pixel pour tracking
+- ✅ Webhook server (FastAPI)
+- ✅ MongoDB pour persistance
+- ✅ Analytics en temps réel
 
-- ✅ Landing page responsiva e otimizada
-- ✅ Bot Telegram funcional com tracking
-- ✅ Pixel Snapchat integrado e testado
-- ✅ Documentação completa
-- ✅ 3 meses de suporte premium incluído
+## 🛠️ Stack Technique
 
-## 🛠️ Stack Tecnológica
-
-### Frontend (Landing Page)
+**Frontend:**
 - HTML5, CSS3, JavaScript
-- Framework: React/Next.js ou Vanilla (a definir com cliente)
-- Tailwind CSS ou CSS puro
-- Otimização de imagens (WebP)
+- GitHub Pages (hosting)
 
-### Backend (Bot)
+**Backend:**
 - Python 3.11+
+- FastAPI (webhook server)
 - python-telegram-bot
-- FastAPI para webhooks
-- MongoDB para dados
-- Redis para cache (opcional)
+- MongoDB Atlas
+- Railway (hosting)
 
-### Deploy
-- Vercel/Netlify (frontend)
-- Railway/Heroku (backend)
-- Cloudflare (CDN + DNS)
+## 📋 Structure du Projet
 
-## 📅 Timeline
+```
+├── landing-page.html          # Page principale
+├── index.html                 # Redirection
+├── test.html                  # Suite de tests
+├── webhook_server.py          # Serveur webhook FastAPI
+├── telegram_bot.py            # Bot Telegram
+├── requirements.txt           # Dépendances Python
+├── railway.toml               # Config Railway
+└── .github/workflows/         # CI/CD GitHub Actions
+```
 
-### Semana 1 (19-26 Dez)
-- [ ] Design da landing page
-- [ ] Estrutura HTML/CSS
-- [ ] Configuração do Bot Telegram
-- [ ] Setup inicial Snapchat Pixel
+## 🚀 Déploiement
 
-### Semana 2 (27 Dez - 2 Jan)
-- [ ] Implementação completa da landing
-- [ ] Lógica do bot e tracking
-- [ ] Integração Snapchat
-- [ ] Testes iniciais
+### Frontend (GitHub Pages)
+Déployé automatiquement via GitHub Actions à chaque push sur `main`.
 
-### Semana 3 (3-9 Jan)
-- [ ] Refinamentos e ajustes
-- [ ] Testes de conversão
-- [ ] Otimização de performance
-- [ ] Preparação para deploy
+### Backend (Railway)
+1. Connecter le repo sur Railway
+2. Configurer les variables d'environnement
+3. Deploy automatique
 
-### Semana 4 (10-16 Jan)
-- [ ] Deploy em produção
-- [ ] Testes finais
-- [ ] Documentação
-- [ ] Entrega ao cliente
+## 📊 Configuration
 
-## 💰 Breakdown Financeiro
+Variables d'environnement requises:
+```env
+TELEGRAM_BOT_TOKEN=your_token
+ADMIN_CHAT_ID=your_chat_id
+MONGODB_URL=your_mongodb_url
+DATABASE_NAME=landing_bot
+```
 
-| Item | Horas | Valor/Hora | Total |
-|------|-------|------------|-------|
-| Landing Page | 8-12h | €50-70 | €600-840 |
-| Bot Telegram | 10-15h | €50-70 | €700-1.050 |
-| Snapchat Pixel | 3-5h | €50-70 | €210-350 |
-| Deploy | 2-4h | €50-70 | €140-280 |
-| Testes | 4-6h | €50-70 | €280-420 |
-| **TOTAL** | **27-42h** | | **€1.930-2.940** |
+## 📖 Documentation
 
-## 📊 Mensalidade
+- [SETUP.md](./SETUP.md) - Guide de configuration
+- [DEPLOY_RAILWAY_GITHUB.md](./DEPLOY_RAILWAY_GITHUB.md) - Guide de déploiement
+- [PLATAFORMAS.md](./PLATAFORMAS.md) - Options de plateformes
+- [INSTRUCOES_CLIENTE.md](./INSTRUCOES_CLIENTE.md) - Instructions client
 
-### Meses 1-3 (€400/mês)
-- Hospedagem gerenciada
-- Manutenção do bot
-- Ajustes landing (até 2h/mês)
-- Suporte técnico prioritário
-- Analytics mensais detalhados
+## 💰 Coûts
 
-### Meses 4+ (€300/mês)
-- Hospedagem gerenciada
-- Manutenção do bot
-- Suporte técnico padrão
-- Analytics mensais
+- **GitHub Pages:** €0/mois (gratuit)
+- **Railway:** €5/mois
+- **MongoDB Atlas:** €0/mois (free tier 512MB)
+- **Total:** ~€5/mois
 
-## 📞 Contatos
+## 🧪 Tests
 
-**Desenvolvedor:** Theo Dev Team
-**Email:** [seu-email]
-**Telegram:** [seu-telegram]
+Accédez à la page de tests: https://avilaops.github.io/landing-bot-client-france/test.html
 
-## 📝 Notas
+Tests disponibles:
+1. Health check webhook server
+2. Connexion bot Telegram
+3. Soumission de lead de test
+4. Chargement Snapchat Pixel
 
-- Proposta aprovada em 19/12/2025
-- Forma de pagamento: 30% início, 40% beta, 30% produção
-- Cliente esperando início imediato
+## 📞 Support
+
+Pour questions ou support technique, consultez la documentation ou créez une issue.
+
+## 📄 Licence
+
+© 2025 - Projet propriétaire du client
+
+---
+
+**Status:** ✅ Production Ready | 🚀 Live at https://avilaops.github.io/landing-bot-client-france/
