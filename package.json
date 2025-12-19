@@ -1,0 +1,33 @@
+{
+  "name": "leadcapture-landing",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Landing Page + Telegram Bot - Apple-inspired design with TypeScript",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "iconoir": "^7.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avilaops/landing-bot-client-france.git"
+  },
+  "keywords": [
+    "landing-page",
+    "typescript",
+    "vite",
+    "iconoir",
+    "telegram-bot"
+  ],
+  "author": "Avila Development",
+  "license": "MIT"
+}
