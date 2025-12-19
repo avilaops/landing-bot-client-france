@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page - Webhook Integration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-card">
+        <h1>🧪 Test Suite - Landing Bot Project</h1>
+        <p>Teste todos os componentes do sistema</p>
+    </div>
+
+    <div class="test-card">
+        <h2>1. Test Webhook Server</h2>
+        <input type="text" id="webhookUrl" placeholder="https://seu-webhook.railway.app">
+        <button onclick="testWebhook()">Test Health Check</button>
+        <div id="webhookResult" class="result"></div>
+    </div>
+
+    <div class="test-card">
+        <h2>2. Test Telegram Bot</h2>
+        <input type="text" id="botToken" placeholder="Bot Token">
+        <button onclick="testTelegramBot()">Test Bot Connection</button>
+        <div id="botResult" class="result"></div>
+    </div>
+
+    <div class="test-card">
+        <h2>3. Test Lead Submission</h2>
+        <input type="text" id="testName" placeholder="Nome" value="Test User">
+        <input type="email" id="testEmail" placeholder="Email" value="test@exemple.fr">
+        <input type="text" id="testPhone" placeholder="Téléphone" value="+33 6 12 34 56 78">
+        <button onclick="testLeadSubmission()">Submit Test Lead</button>
+        <div id="leadResult" class="result"></div>
+    </div>
+
+    <div class="test-card">
+        <h2>4. Test Snapchat Pixel</h2>
+        <input type="text" id="pixelId" placeholder="Snapchat Pixel ID">
+        <button onclick="testSnapchatPixel()">Test Pixel Loading</button>
+        <div id="pixelResult" class="result"></div>
+    </div>
+
+    <script>
+        async function testWebhook() {
+            const url = document.getElementById('webhookUrl').value;
+            const resultDiv = document.getElementById('webhookResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '⏳ Testing...';
+
+            try {
+                const response = await fetch(`${url}/health`);
+                const data = await response.json();
+                
+                resultDiv.className = 'result success';
+                resultDiv.innerHTML = `✅ Success!<br><pre>${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ Error: ${error.message}`;
+            }
+        }
+
+        async function testTelegramBot() {
+            const token = document.getElementById('botToken').value;
+            const resultDiv = document.getElementById('botResult');
+            
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '⏳ Testing...';
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${token}/getMe`);
+                const data = await response.json();
+                
+                if (data.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ Bot Connected!<br>Name: ${data.result.first_name}<br>Username: @${data.result.username}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `❌ Error: ${data.description}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ Error: ${error.message}`;
+            }
+        }
+
+        async function testLeadSubmission() {
+            const webhookUrl = document.getElementById('webhookUrl').value;
+            const resultDiv = document.getElementById('leadResult');
+            
+            const leadData = {
+                name: document.getElementById('testName').value,
+                email: document.getElementById('testEmail').value,
+                phone: document.getElementById('testPhone').value,
+                company: 'Test Company',
+                message: 'Test message from integration test',
+                source: 'Test Suite'
+            };
+
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.innerHTML = '⏳ Submitting...';
+
+            try {
+                const response = await fetch(`${webhookUrl}/webhook/lead`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(leadData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.innerHTML = `✅ Lead Submitted!<br>ID: ${data.lead_id}<br>Check your Telegram for notification!`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.innerHTML = `❌ Error: ${data.message || 'Unknown error'}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = `❌ Error: ${error.message}`;
+            }
+        }
+
+        function testSnapchatPixel() {
+            const pixelId = document.getElementById('pixelId').value;
+            const resultDiv = document.getElementById('pixelResult');
+            
+            resultDiv.style.display = 'block';
+            
+            if (!pixelId) {
+                resultDiv.className = 'result error';
+                resultDiv.innerHTML = '❌ Please enter Pixel ID';
+                return;
+            }
+
+            // Load Snapchat Pixel
+            (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
+            {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
+            a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
+            r.src=n;var u=t.getElementsByTagName(s)[0];
+            u.parentNode.insertBefore(r,u);})(window,document,
+            'https://sc-static.net/scevent.min.js');
+            
+            snaptr('init', pixelId);
+            snaptr('track', 'PAGE_VIEW');
+
+            resultDiv.className = 'result success';
+            resultDiv.innerHTML = `✅ Pixel Loaded!<br>ID: ${pixelId}<br>Check Snapchat Events Manager for PAGE_VIEW event.`;
+        }
+    </script>
+</body>
+</html>

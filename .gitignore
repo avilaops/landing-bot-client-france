@@ -1,0 +1,11 @@
+node_modules/
+.env
+*.log
+.DS_Store
+.vscode/
+__pycache__/
+*.pyc
+.vercel
+.railway
+venv/
+env/
