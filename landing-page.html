@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Landing page optimisée pour conversions avec tracking intégré">
-    <title>Landing Page - Conversion Optimisée</title>
+    <title>LeadCapture — Simple. Powerful. Effective.</title>
+    
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Snapchat Pixel -->
     <script type="text/javascript">
@@ -15,11 +20,9 @@
     u.parentNode.insertBefore(r,u);})(window,document,
     'https://sc-static.net/scevent.min.js');
 
-    // TODO: Remplacer YOUR_PIXEL_ID par l'ID réel du pixel
     snaptr('init', 'YOUR_PIXEL_ID', {
         'user_email': '__INSERT_USER_EMAIL__'
     });
-
     snaptr('track', 'PAGE_VIEW');
     </script>
 
@@ -31,30 +34,51 @@
         }
 
         :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --accent: #f093fb;
-            --text: #333;
-            --light: #f8f9fa;
+            --primary: #0071e3;
+            --primary-dark: #0077ed;
+            --secondary: #1d1d1f;
+            --text: #1d1d1f;
+            --text-secondary: #86868b;
+            --bg: #fbfbfd;
             --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.72);
+            --shadow: rgba(0, 0, 0, 0.08);
+            --shadow-lg: rgba(0, 0, 0, 0.12);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --secondary: #f5f5f7;
+                --text: #f5f5f7;
+                --text-secondary: #a1a1a6;
+                --bg: #000000;
+                --glass: rgba(29, 29, 31, 0.72);
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
             color: var(--text);
+            background: var(--bg);
             overflow-x: hidden;
         }
 
         /* Hero Section */
         .hero {
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 80px 20px 60px;
             position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             overflow: hidden;
         }
 
@@ -65,124 +89,184 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-            background-size: cover;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .hero-content {
             max-width: 1200px;
+            width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 80px;
             align-items: center;
             z-index: 1;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
         }
 
         .hero-text {
             color: var(--white);
         }
 
+        .hero-label {
+            display: inline-block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.4s forwards;
+        }
+
         .hero-text h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            animation: fadeInUp 0.8s ease-out;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
         }
 
         .hero-text p {
-            font-size: 1.3em;
-            margin-bottom: 30px;
-            opacity: 0.95;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            font-weight: 400;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
         }
 
         .cta-button {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background: var(--white);
             color: var(--primary);
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-size: 1.2em;
-            font-weight: bold;
+            padding: 16px 32px;
+            border-radius: 980px;
+            font-size: 1.0625rem;
+            font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 1s forwards;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
         }
 
-        /* Form Card */
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Form Card - Glassmorphism */
         .form-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: fadeInUp 0.8s ease-out 0.3s backwards;
+            background: var(--glass);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            padding: 48px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12),
+                        0 2px 8px rgba(0,0,0,0.08);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
         }
 
         .form-card h2 {
-            color: var(--primary);
-            margin-bottom: 25px;
-            font-size: 2em;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .form-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
+            font-size: 0.9375rem;
+            font-weight: 500;
             color: var(--text);
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1em;
-            transition: border-color 0.3s;
+            padding: 14px 16px;
+            border: 1.5px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--white);
+            color: var(--text);
+            transition: all 0.2s ease;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
         }
 
         .submit-button {
             width: 100%;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--primary);
             color: var(--white);
-            padding: 18px;
+            padding: 16px;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: bold;
+            border-radius: 12px;
+            font-size: 1.0625rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.2s ease;
+            margin-top: 8px;
         }
 
         .submit-button:hover {
-            transform: translateY(-2px);
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
         }
 
         .submit-button:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
+            transform: none;
         }
 
         /* Features Section */
         .features {
-            padding: 100px 20px;
-            background: var(--light);
+            padding: 120px 20px;
+            background: var(--bg);
         }
 
         .features-container {
@@ -190,68 +274,147 @@
             margin: 0 auto;
         }
 
+        .section-label {
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
         .section-title {
             text-align: center;
-            font-size: 2.5em;
-            color: var(--primary);
-            margin-bottom: 60px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 80px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
         }
 
         .feature-card {
             background: var(--white);
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 48px 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px var(--shadow-lg);
+            border-color: rgba(0,0,0,0.08);
         }
 
         .feature-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary) 0%, #0077ed 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 24px;
         }
 
         .feature-card h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.5em;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-card p {
+            font-size: 1.0625rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
         }
 
         /* Success Message */
-        .success-message {
+        .success-overlay {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(8px);
             z-index: 1000;
-            text-align: center;
-            max-width: 500px;
+            align-items: center;
+            justify-content: center;
         }
 
-        .success-message.show {
-            display: block;
-            animation: fadeIn 0.5s ease-out;
+        .success-overlay.show {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .success-message {
+            background: var(--white);
+            padding: 56px 48px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 480px;
+            margin: 20px;
+            animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .success-icon {
-            font-size: 4em;
-            color: #38ef7d;
-            margin-bottom: 20px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #34C759 0%, #30D158 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 24px;
+            animation: successPulse 0.6s ease-out;
+        }
+
+        .success-message h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .success-message p {
+            font-size: 1.0625rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--white);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
         }
 
         /* Animations */
@@ -271,34 +434,86 @@
             to { opacity: 1; }
         }
 
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes successPulse {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Responsive */
         @media (max-width: 968px) {
             .hero-content {
                 grid-template-columns: 1fr;
+                gap: 48px;
                 text-align: center;
             }
 
-            .hero-text h1 {
-                font-size: 2.5em;
+            .form-card {
+                padding: 32px;
             }
 
-            .features-grid {
-                grid-template-columns: 1fr;
+            .features {
+                padding: 80px 20px;
+            }
+
+            .section-subtitle {
+                margin-bottom: 48px;
             }
         }
 
         @media (max-width: 480px) {
-            .hero-text h1 {
-                font-size: 2em;
-            }
-
-            .hero-text p {
-                font-size: 1.1em;
+            .hero {
+                padding: 60px 16px 40px;
             }
 
             .form-card {
-                padding: 25px;
+                padding: 24px;
             }
+
+            .features {
+                padding: 60px 16px;
+            }
+
+            .feature-card {
+                padding: 32px 24px;
+            }
+
+            .success-message {
+                padding: 40px 32px;
+            }
+        }
+
+        /* Scroll fade-in */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -307,91 +522,124 @@
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
+                <span class="hero-label">Nouveau</span>
                 <h1>Transformez vos visiteurs en clients</h1>
-                <p>Solution complète de tracking et conversion pour votre business digital</p>
-                <a href="#form" class="cta-button">Commencer maintenant →</a>
+                <p>La solution complète pour capturer, analyser et convertir vos leads avec une précision inégalée.</p>
+                <a href="#form" class="cta-button">
+                    Commencer gratuitement
+                    <span>→</span>
+                </a>
             </div>
 
             <div class="form-card" id="form">
-                <h2>Démarrez gratuitement</h2>
+                <h2>Démarrez maintenant</h2>
+                <p class="form-subtitle">Essai gratuit. Sans engagement.</p>
                 <form id="leadForm">
                     <div class="form-group">
-                        <label for="name">Nom complet *</label>
-                        <input type="text" id="name" name="name" required>
+                        <label for="name">Nom complet</label>
+                        <input type="text" id="name" name="name" required placeholder="Jean Dupont">
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
+                        <label for="email">Adresse e-mail</label>
+                        <input type="email" id="email" name="email" required placeholder="jean@entreprise.fr">
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Téléphone</label>
-                        <input type="tel" id="phone" name="phone">
+                        <input type="tel" id="phone" name="phone" placeholder="+33 6 12 34 56 78">
                     </div>
 
                     <div class="form-group">
                         <label for="company">Entreprise</label>
-                        <input type="text" id="company" name="company">
+                        <input type="text" id="company" name="company" placeholder="Votre entreprise">
                     </div>
 
                     <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="4"></textarea>
+                        <label for="message">Comment pouvons-nous vous aider ?</label>
+                        <textarea id="message" name="message" rows="3" placeholder="Décrivez votre projet..."></textarea>
                     </div>
 
-                    <button type="submit" class="submit-button">Envoyer ma demande</button>
+                    <button type="submit" class="submit-button">
+                        <span class="button-text">Envoyer ma demande</span>
+                    </button>
                 </form>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section class="features">
+    <section class="features fade-in-section">
         <div class="features-container">
+            <div class="section-label">Fonctionnalités</div>
             <h2 class="section-title">Pourquoi nous choisir ?</h2>
+            <p class="section-subtitle">Des outils puissants pour maximiser vos conversions et développer votre business.</p>
+            
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
                     <h3>Analytics en temps réel</h3>
-                    <p>Suivez vos conversions et optimisez vos campagnes avec des données précises</p>
+                    <p>Suivez vos conversions minute par minute avec des données précises et actionnables.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">🚀</div>
-                    <h3>Performance optimale</h3>
-                    <p>Pages ultra-rapides pour une meilleure expérience utilisateur et SEO</p>
+                    <div class="feature-icon">⚡</div>
+                    <h3>Performance extrême</h3>
+                    <p>Pages ultra-rapides optimisées pour le SEO et une expérience utilisateur exceptionnelle.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">🔒</div>
-                    <h3>Sécurité garantie</h3>
-                    <p>Protection complète de vos données et conformité RGPD</p>
+                    <h3>Sécurité totale</h3>
+                    <p>Protection maximale de vos données avec conformité RGPD garantie.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Success Message -->
-    <div id="successMessage" class="success-message">
-        <div class="success-icon">✓</div>
-        <h2>Merci !</h2>
-        <p>Votre demande a été envoyée avec succès. Nous vous contacterons très bientôt.</p>
+    <!-- Success Overlay -->
+    <div id="successOverlay" class="success-overlay">
+        <div class="success-message">
+            <div class="success-icon">✓</div>
+            <h2>Merci !</h2>
+            <p>Votre demande a été envoyée avec succès. Notre équipe vous contactera très bientôt.</p>
+        </div>
     </div>
 
     <script>
-        // Configuration - Webhook Railway
+        // Configuration
         const WEBHOOK_URL = 'https://landing-bot-client-france-production.up.railway.app/webhook/lead';
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(el => {
+            observer.observe(el);
+        });
 
         // Form Submission
         document.getElementById('leadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const submitButton = this.querySelector('.submit-button');
+            const buttonText = submitButton.querySelector('.button-text');
+            
+            // Loading state
             submitButton.disabled = true;
-            submitButton.textContent = 'Envoi en cours...';
+            buttonText.innerHTML = '<span class="spinner"></span>';
 
-            // Récupérer les données du formulaire
+            // Form data
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -400,7 +648,7 @@
                 message: document.getElementById('message').value || 'Aucun message'
             };
 
-            // Track conversion sur Snapchat
+            // Snapchat tracking
             if (typeof snaptr !== 'undefined') {
                 snaptr('track', 'SIGN_UP', {
                     'user_email': formData.email
@@ -408,7 +656,6 @@
             }
 
             try {
-                // Envoyer au webhook Railway
                 const response = await fetch(WEBHOOK_URL, {
                     method: 'POST',
                     headers: {
@@ -418,14 +665,14 @@
                 });
 
                 if (response.ok) {
-                    // Afficher le message de succès
-                    document.getElementById('successMessage').classList.add('show');
+                    // Show success
+                    document.getElementById('successOverlay').classList.add('show');
                     this.reset();
 
-                    // Cacher le message après 5 secondes
+                    // Hide after 4 seconds
                     setTimeout(() => {
-                        document.getElementById('successMessage').classList.remove('show');
-                    }, 5000);
+                        document.getElementById('successOverlay').classList.remove('show');
+                    }, 4000);
                 } else {
                     throw new Error('Erreur serveur');
                 }
@@ -435,7 +682,7 @@
                 alert('Une erreur est survenue. Veuillez réessayer.');
             } finally {
                 submitButton.disabled = false;
-                submitButton.textContent = 'Envoyer ma demande';
+                buttonText.textContent = 'Envoyer ma demande';
             }
         });
 
@@ -451,6 +698,13 @@
                     });
                 }
             });
+        });
+
+        // Close success overlay on click
+        document.getElementById('successOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('show');
+            }
         });
     </script>
 </body>
